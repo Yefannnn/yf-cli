@@ -20,7 +20,7 @@
     "name": "yf"
   },
   "bin": {
-    "yf": "bin/index.js"
+    "yefan-cli": "bin/index.js"
   },
   "license": "ISC",
   "devDependencies": {
