@@ -1,6 +1,6 @@
 {
   "name": "yefan-cli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "yefan-cli 脚手架",
   "main": "index.js",
   "scripts": {
