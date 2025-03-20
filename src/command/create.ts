@@ -2,6 +2,10 @@ import { select, input } from '@inquirer/prompts';
 import { clone } from '../utils/clone';
 import fs from 'fs-extra';
 import path from 'path';
+import axios, { AxiosResponse } from 'axios'
+import lodash from 'lodash';
+import { name, version } from '../../package.json';
+import chalk from 'chalk';
 
 export interface TemplateInfo {
     label: string; // 项目名称
@@ -68,6 +72,34 @@ export const templates_: TemplateInfo_ = {
     },
 }
 
+// npm 包提供了根据包名称查询包信息的接口
+// 我们在这里直接使用 axios 请求调用即可
+export const getNpmInfo = async (npmName: string) => {
+    const npmUrl = 'https://registry.npmjs.org/' + npmName
+    let res = {}
+    try {
+        res = await axios.get(npmUrl)
+    } catch (err) {
+        console.error(err as string)
+    }
+    return res
+}
+export const getNpmLatestVersion = async (npmName: string) => {
+    // data['dist-tags'].latest 为最新版本号
+    const { data } = (await getNpmInfo(npmName)) as AxiosResponse
+    return data['dist-tags'].latest
+}
+
+export const checkVersion = async (name: string, curVersion: string) => {
+    const latestVersion = await getNpmLatestVersion(name)
+    const need = lodash.gt(latestVersion, curVersion)
+    if (need) {
+        console.info(`检测到 yefan-cli 最新版:${chalk.blueBright(latestVersion)} 当前版本:${chalk.blueBright(curVersion)} ~`)
+        console.info(`可使用 ${chalk.yellow('pnpm')} install yefan-cli@latest 更新 ~`)
+    }
+    return need
+}
+
 
 
 export const create = async (prjName?: string) => {
@@ -83,6 +115,9 @@ export const create = async (prjName?: string) => {
             return // 不覆盖直接结束
         }
     }
+
+    // 选择模板之前 -- 先检查版本
+    await checkVersion(name, version) // 检测版本更新
 
     let templateT = []
     for (const key in templates_) {
