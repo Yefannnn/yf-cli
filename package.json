@@ -1,6 +1,6 @@
 {
   "name": "yefan-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "yefan-cli 脚手架",
   "main": "index.js",
   "scripts": {
@@ -15,15 +15,14 @@
     "脚手架",
     "Vite-Vue4-TypeScript-template"
   ],
-  "author": "",
+  "author": {
+    "name": "yf"
+  },
   "files": [
     "dist",
     "bin",
     "README.md"
   ],
-  "author": {
-    "name": "yf"
-  },
   "bin": {
     "yefan-cli": "bin/index.js"
   },
