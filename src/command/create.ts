@@ -58,6 +58,13 @@ export const templates_: TemplateInfo_ = {
                 description: '基于Vue3的后台管理系统模板(开源项目)',
                 branch: 'main'
             },
+            {
+                label: 'admin-vue3-ts-h5-template',
+                name: "admin-pro-h5",
+                downloadUrl: 'git@gitee.com:yefan008/admin-pro-h5.git',
+                description: '基于Vue3的H5模板',
+                branch: 'master'
+            },
         ]
     },
     'React': {
