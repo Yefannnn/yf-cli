@@ -95,7 +95,7 @@ export const checkVersion = async (name: string, curVersion: string) => {
     const need = lodash.gt(latestVersion, curVersion)
     if (need) {
         console.info(`检测到 yefan-cli 最新版:${chalk.blueBright(latestVersion)} 当前版本:${chalk.blueBright(curVersion)} ~`)
-        console.info(`可使用 ${chalk.yellow('pnpm')} install yefan-cli@latest 更新 ~`)
+        console.info(`可使用 ${chalk.yellow('pnpm')} install yefan-cli@latest 更新 ~ 或者使用 yefan-cli update 命令更新`)
     }
     return need
 }
