@@ -6,6 +6,7 @@ import axios, { AxiosResponse } from 'axios'
 import lodash from 'lodash';
 import { name, version } from '../../package.json';
 import chalk from 'chalk';
+import { log } from '../utils/log';
 
 export interface TemplateInfo {
     label: string; // 项目名称
@@ -80,7 +81,7 @@ export const getNpmInfo = async (npmName: string) => {
     try {
         res = await axios.get(npmUrl)
     } catch (err) {
-        console.error(err as string)
+        log.error(err as string)
     }
     return res
 }
@@ -94,8 +95,8 @@ export const checkVersion = async (name: string, curVersion: string) => {
     const latestVersion = await getNpmLatestVersion(name)
     const need = lodash.gt(latestVersion, curVersion)
     if (need) {
-        console.info(`检测到 yefan-cli 最新版:${chalk.blueBright(latestVersion)} 当前版本:${chalk.blueBright(curVersion)} ~`)
-        console.info(`可使用 ${chalk.yellow('pnpm')} install yefan-cli@latest 更新 ~ 或者使用 yefan-cli update 命令更新`)
+        log.info(`检测到 yefan-cli 最新版:${chalk.blueBright(latestVersion)} 当前版本:${chalk.blueBright(curVersion)} ~`)
+        log.info(`可使用 ${chalk.yellow('pnpm')} install yefan-cli@latest 更新 ~ 或者使用 yefan-cli update 命令更新`)
     }
     return need
 }
@@ -177,7 +178,7 @@ export const create = async (prjName?: string) => {
 
     const info = templateList?.length && templateList.find((item: TemplateInfo) => item.label === template) || null
     if (!info) {
-        console.log('模板不存在')
+        log.warning('模板不存在')
         return
     }
     // 下载模板
@@ -186,7 +187,7 @@ export const create = async (prjName?: string) => {
 
 
 export const isOverwrite = async (fileName: string) => {
-    console.warn(`${fileName} 文件已存在 !`)
+    log.warning(`${fileName} 文件已存在 !`)
     return select({
         message: '是否覆盖原文件: ',
         choices: [
