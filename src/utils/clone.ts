@@ -2,6 +2,7 @@ import simpleGit, { SimpleGitOptions } from 'simple-git';
 import createLogger from 'progress-estimator';
 import chalk from 'chalk';
 import { log } from './log';
+let figlet = require("figlet");
 
 const gitOptions: Partial<SimpleGitOptions> = {
     baseDir: process.cwd(),
@@ -16,6 +17,25 @@ let logger = createLogger({
     },
     storagePath: '.progress-estimator', // defaults to '.progress-estimator'.
 });
+
+// 克隆成功后提示
+let cloneSuccess = async () => {
+    log.success('项目初始化成功')
+    log.success('执行以下命令开始项目')
+    log.info(chalk.greenBright(`cd ${process.cwd()}`))
+    log.info(chalk.greenBright('pnpm install'))
+    log.info(chalk.greenBright('pnpm run dev'))
+    let data = await figlet.text("welcome  to  use  yefan-cli", {
+        font: 'Standard', // 字体 
+        horizontalLayout: 'default', // default or full
+        verticalLayout: 'default', // default or full
+        width: 200, // 宽度
+        whitespaceBreak: true, // 是否保留空格
+    });
+    console.log(chalk.rgb(10, 166, 218).visible(data));
+}
+
+
 export const clone = async (url: string, projectName: string, options: string[]) => {
     const git = simpleGit(gitOptions)
     try {
@@ -23,7 +43,8 @@ export const clone = async (url: string, projectName: string, options: string[])
             estimate: 7000, // 估计时间
         })
         log.success(chalk.green('项目初始化完成'))
-        log.success(chalk.blackBright('==============================================================='))
+        console.log(chalk.blackBright('==============================================================='))
+        await cloneSuccess()
     } catch (error) {
         log.error(chalk.red('项目初始化失败'))
         log.error(chalk.blackBright('==============================================================='))
