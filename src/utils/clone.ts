@@ -2,7 +2,8 @@ import simpleGit, { SimpleGitOptions } from 'simple-git';
 import createLogger from 'progress-estimator';
 import chalk from 'chalk';
 import { log } from './log';
-let figlet = require("figlet");
+import figlet from 'figlet';
+// let figlet = require("figlet");
 
 const gitOptions: Partial<SimpleGitOptions> = {
     baseDir: process.cwd(),
