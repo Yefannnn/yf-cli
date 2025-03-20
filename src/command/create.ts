@@ -11,18 +11,37 @@ export interface TemplateInfo {
 }
 // 这里保存了我写好了咱们的之前开发的模板
 export const templates: Map<string, TemplateInfo> = new Map(Object.entries({
-    'Vite4-Vue3-Typescript-template': {
-        name: "admin-template",
-        downloadUrl: 'git@gitee.com:sohucw/admin-pro.git',
+    'admin-vue3-ts-template': {
+        name: "admin-pro",
+        downloadUrl: 'git@gitee.com:yefan008/admin-vue3-ts.git',
         description: 'Vue3技术栈开发模板',
-        branch: 'dev11'
+        branch: 'master'
     },
-    'Vite4-Vue3-Typescript-template2': {
-        name: "admin-template",
-        downloadUrl: 'git@gitee.com:sohucw/admin-pro.git',
-        description: 'Vue3技术栈开发模板',
-        branch: 'dev6'
+    'React18-Vite5-Ts-template': {
+        name: "react18+vite5+ts",
+        downloadUrl: 'git@gitee.com:yefan008/admin-react-ts.git',
+        description: 'React18技术栈开发模板',
+        branch: 'master'
     },
+    'admin-vue3-box-template': {
+        name: "react18+vite5+ts",
+        downloadUrl: 'git@gitee.com:yefan008/admin-vue3-box.git',
+        description: '基于Vue3的后台管理系统模板(开源项目)',
+        branch: 'master'
+    },
+    'fantastic-admin-vue3-template': {
+        name: "fantastic-admin",
+        downloadUrl: 'git@gitee.com:fantastic-admin/basic.git',
+        description: '基于Vue3的后台管理系统模板(开源项目)',
+        branch: 'main'
+    },
+    'fantastic-admin-vue2-template': {
+        name: "fantastic-admin",
+        downloadUrl: 'git@gitee.com:fantastic-admin/basic.git',
+        description: '基于Vue3的后台管理系统模板(开源项目)',
+        branch: 'vue2'
+    },
+
 }))
 
 
